@@ -1,15 +1,16 @@
-import React, { useReducer } from 'react';
-import numberReducer from './numberReducer';
+import React, { useContext } from 'react';
+import ValueContext from './ValueContext';
 
-function Child2() {
-  let [state, dispatch ] = useReducer(numberReducer,52);
+function Child() {
+  let value = useContext(ValueContext);
+  console.log("value ",value);
+  let updateValue = value[1];
   return (
     <div >
-      Child 2 {state}
-      <button onClick={()=> { dispatch({type:"INCREMENT", val: 67});  }}>Increment</button>
-      <button onClick={()=> { dispatch({type:"DECREMENT", val: 34});  }}>Decrement</button>
+      Child number {value[0]}
+      <button onClick={()=> { updateValue(++value[0]) }}>Update value</button>
     </div>
   );
 }
 
-export default Child2;
+export default Child;
